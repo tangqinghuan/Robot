@@ -49,6 +49,32 @@ func genRandQuantityList2() {
 	}
 }
 
+// 每个数量都在指定区间范围内
+// 总数量固定, 个数固定
+func genRandQuantityList3() {
+	minQ := float64(100)
+	maxQ := float64(1000)
+	totalQ := float64(5000)
+	count := 20
+
+	if minQ*float64(count) > totalQ || maxQ*float64(count) < totalQ {
+		panic("error")
+	}
+
+	restQ := totalQ - minQ*float64(count)
+	for i := 0; i < count; i++ {
+		var q float64
+		if i == count-1 {
+			q = restQ
+		} else {
+			d := restQ / float64(count-i) * 2
+			q = rand.Float64() * math.Min(d, maxQ-minQ)
+		}
+		restQ -= q
+		fmt.Println(q + minQ)
+	}
+}
+
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	genRandQuantityList1()
