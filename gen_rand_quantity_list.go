@@ -30,6 +30,10 @@ func genRandQuantityList2() {
 	maxQ := float64(1000)
 	totalQ := float64(1000000)
 	count := 20
+	
+	if minQ*float64(count) > totalQ || maxQ*float64(count) < totalQ {
+		panic("error")
+	}
 
 	rdLis := make([]float64, count)
 	sumRd := float64(0)
